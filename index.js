@@ -18,7 +18,7 @@ function LinkedList() {
       while (currentNode.next != null) {
         currentNode = currentNode.next;
       }
-      currentNode.next = Node(value);     
+      currentNode.next = Node(value);
     }
     console.log(head);
   }
@@ -48,6 +48,23 @@ function LinkedList() {
     //returns index of node containing value passed in, else null
   }
   function toString() {
+    let list = "";
+
+    if (head === null) {
+      console.log("List is empty");
+    } else {
+      let currentNode = head;
+      let currentValue = "";
+      while (currentNode.next != null) {
+        currentValue = `( ${currentNode.value} ) -> `;
+        list += currentValue;
+        currentNode = currentNode.next;
+      }
+      currentValue = `( ${currentNode.value} ) -> null`;
+      list += currentValue;
+      console.log(list);
+    }
+
     /*
         represents your LinkedList objects as strings, 
         so you can print them out and preview them in the console. 
@@ -61,11 +78,11 @@ function LinkedList() {
     //removes the node at the given index
   }
 
-  return { append };
+  return { append, toString };
 }
 
 const list = LinkedList();
-for(let i = 0; i<10; i++){
-    list.append(i)
+for (let i = 0; i < 10; i++) {
+  list.append(i);
 }
-
+list.toString();
