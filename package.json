@@ -1,0 +1,23 @@
+{
+  "name": "linked-lists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CiaranO-C/linked-lists.git"
+  },
+  "keywords": [
+    "linked-list"
+  ],
+  "author": "Ciaran OC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CiaranO-C/linked-lists/issues"
+  },
+  "homepage": "https://github.com/CiaranO-C/linked-lists#readme"
+}
