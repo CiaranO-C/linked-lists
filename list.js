@@ -95,13 +95,12 @@ export function LinkedList() {
     } else {
       let currentNode = head;
       let currentValue = "";
-      while (currentNode.next != null) {
+      while (currentNode != null) {
         currentValue = `( ${currentNode.value} ) -> `;
         list += currentValue;
         currentNode = currentNode.next;
       }
-      currentValue = `( ${currentNode.value} ) -> null`;
-      list += currentValue;
+      list += 'null';
       console.log(list);
     }
   }
