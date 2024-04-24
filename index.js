@@ -6,47 +6,92 @@ function Node(value = null, next = null) {
 }
 
 function LinkedList() {
-  let index = 0;
+  let length = 0;
   let head = null;
+  let tail = null;
 
   function append(value) {
+    let node = Node(value);
+   
     if (head === null) {
-      head = Node(value);
+      head = node;
+      tail = node;
     } else {
       let currentNode = head;
 
       while (currentNode.next != null) {
         currentNode = currentNode.next;
       }
-      currentNode.next = Node(value);
+      currentNode.next = node;
+      tail = node;
     }
-    console.log(head);
+    length++;
   }
 
   function prepend(value) {
-    //adds a new node containing value to the start of the list
+    if (head === null) {
+      head = Node(value);
+    } else {
+      let previousHead = head;
+      head = Node(value, previousHead);
+    }
+    length++;
   }
+
   function size() {
-    return index;
+    return length;
   }
+
   function getHead() {
-    //returns the first node in the list
+    return head;
   }
-  function tail() {
-    //returns the tail node in the list
+
+  function getTail() {
+    return tail;
   }
+
   function at(index) {
-    //returns the node at the given index
+    let currentNode = head;
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    return currentNode;
   }
+
   function pop() {
-    //removes the last element from the list
+    let previousNode;
+    let currentNode = head;
+    while(currentNode.next != null) {
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+    }
+    previousNode.next = null;
+    tail = previousNode;
+    length--;
   }
+
   function contains(value) {
-    //returns true if value passed in is found in list. else false
+    let currentNode = head;
+    while(currentNode != null){
+        if(currentNode.value === value){
+            return true;
+        }
+        currentNode = currentNode.next;
+    }
+    return false;
   }
+
   function find(value) {
-    //returns index of node containing value passed in, else null
+    let currentNode = head;
+    for(let i = 0; i < length; i++){
+        if(currentNode.value === value){
+            return i;
+        }
+        currentNode = currentNode.next;
+    }
+    return 'value not present';
   }
+
   function toString() {
     let list = "";
 
@@ -64,21 +109,33 @@ function LinkedList() {
       list += currentValue;
       console.log(list);
     }
-
-    /*
-        represents your LinkedList objects as strings, 
-        so you can print them out and preview them in the console. 
-        The format should be: ( value ) -> ( value ) -> ( value ) -> null
-        */
   }
+
   function insertAt(value, index) {
-    //inserts a new node with provided value at the given index
-  }
-  function removeAt(index) {
-    //removes the node at the given index
+    let previousNode;
+    let currentNode = head;
+   for(let i = 0; i < index; i++){
+    previousNode = currentNode;
+    currentNode = currentNode.next;
+   }
+   previousNode.next = Node(value, currentNode);
+   length++;
   }
 
-  return { append, toString };
+  function removeAt(index) {
+    let previousNode;
+    let currentNode = head;
+    let followingNode;
+    for(let i = 0; i < index; i++){
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+        followingNode = currentNode.next;
+    }
+    previousNode.next = followingNode;
+    length--;
+  }
+
+  return { append, prepend, toString, getHead, getTail, at, pop, contains, find, insertAt, removeAt, size };
 }
 
 const list = LinkedList();
@@ -86,3 +143,30 @@ for (let i = 0; i < 10; i++) {
   list.append(i);
 }
 list.toString();
+console.log(list.size());
+
+list.prepend("a");
+list.prepend("b");
+list.toString();
+console.log(list.size());
+console.log(list.getHead());
+console.log(list.getTail());
+console.log(list.at(0));
+console.log(list.at(2));
+console.log(list.at(6));
+list.pop();
+list.toString();
+console.log(list.size());
+console.log(list.contains(4));
+console.log(list.contains('a'));
+console.log(list.find('a'));
+console.log(list.find(3));
+console.log(list.find('8'));
+list.toString();
+console.log(list.size());
+list.insertAt('g', 5);
+list.toString();
+console.log(list.size());
+list.removeAt(5);
+list.toString();
+console.log(list.size());
